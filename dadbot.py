@@ -110,7 +110,10 @@ def respond_trigger_words(update,tokenize,triggers,responses):
     for ands in triggers:
         a = False
         for ors in ands:
-            a = a or text.find(ors)!=-1
+            if tokenize:
+                a = a or ors in text
+            else:
+                a = a or text.find(ors)!=-1
         b = b and a
     if b:
         send_message(responses[random.randint(0,len(responses)-1)],chat)
@@ -125,7 +128,10 @@ def respond_trigger_words_user(update,tokenize,triggers,responses,userid):
     for ands in triggers:
         a = False
         for ors in ands:
-            a = a or text.find(ors)!=-1
+            if tokenize:
+                a = a or ors in text
+            else:
+                a = a or text.find(ors)!=-1
         b = b and a
     if b:
         try:
